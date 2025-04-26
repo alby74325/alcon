@@ -16,6 +16,9 @@
             --card-bg: #1c1c1e;
             --text-color: #ffffff;
             --text-secondary: #b8b8b8;
+            --category1-color: #6b17e6;
+            --category2-color: #9917e6;
+            --category3-color: #2c75ff;
         }
         
         * {
@@ -137,6 +140,49 @@
             margin: 0 auto;
         }
         
+        .category-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin: 50px 0 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            border-radius: 3px;
+        }
+        
+        .category-1 .category-title {
+            color: var(--category1-color);
+        }
+        
+        .category-1 .category-title::after {
+            background: var(--category1-color);
+        }
+        
+        .category-2 .category-title {
+            color: var(--category2-color);
+        }
+        
+        .category-2 .category-title::after {
+            background: var(--category2-color);
+        }
+        
+        .category-3 .category-title {
+            color: var(--category3-color);
+        }
+        
+        .category-3 .category-title::after {
+            background: var(--category3-color);
+        }
+        
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -184,6 +230,39 @@
             background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
             opacity: 0.7;
             transition: opacity 0.3s;
+        }
+        
+        .category-1 .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--category1-color);
+            z-index: 1;
+        }
+        
+        .category-2 .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--category2-color);
+            z-index: 1;
+        }
+        
+        .category-3 .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--category3-color);
+            z-index: 1;
         }
         
         .card:hover .overlay {
@@ -535,7 +614,20 @@
         </header>
         
         <section id="discografia">
-            <div class="grid" id="albumGrid"></div>
+            <div class="category-1">
+                <h2 class="category-title">Epica Cosmica</h2>
+                <div class="grid" id="category1Grid"></div>
+            </div>
+            
+            <div class="category-2">
+                <h2 class="category-title">Sinfonia dell'Oscurità</h2>
+                <div class="grid" id="category2Grid"></div>
+            </div>
+            
+            <div class="category-3">
+                <h2 class="category-title">Luce e Metropoli</h2>
+                <div class="grid" id="category3Grid"></div>
+            </div>
         </section>
         
         <section id="chi-siamo" class="coming-soon">
@@ -639,30 +731,39 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Album data
+            // Album data con categorie
             const albums = [
-                { title: "Alcon, King of the Universe", img: "images/01_alcon_king_of_the_universe.jpg", audio: "audio/01_alcon_king_of_the_universe.mp3", text: "Una ballata epica che racconta l'ascesa di Alcon, sovrano di mondi e signore delle stelle.", ytLink: "https://music.youtube.com/watch?v=placeholder1" },
-                { title: "Alcon and the Assembly of Knights", img: "images/02_alcon_and_the_assembly_of_knights.jpg", audio: "audio/02_alcon_and_the_assembly_of_knights.mp3", text: "La leggenda dell'antico consiglio dei cavalieri, radunati per proteggere l'universo da forze oscure.", ytLink: "https://music.youtube.com/watch?v=placeholder2" },
-                { title: "Captain of the Cosmos", img: "images/03_captain_of_the_cosmos.jpg", audio: "audio/03_captain_of_the_cosmos.mp3", text: "Un viaggio attraverso le galassie al comando di un'astronave leggendaria, alla ricerca di nuove speranze.", ytLink: "https://music.youtube.com/watch?v=placeholder3" },
-                { title: "The Twelve Knights of Alagon", img: "images/04_the_twelve_knights_of_alagon.jpg", audio: "audio/04_the_twelve_knights_of_alagon.mp3", text: "Dodici eroi, dodici destini intrecciati, uniti sotto il vessillo di Alagon per salvare il cosmo.", ytLink: "https://music.youtube.com/watch?v=placeholder4" },
-                { title: "The Veil of Prophecy", img: "images/05_the_veil_of_prophecy.jpg", audio: "audio/05_the_veil_of_prophecy.mp3", text: "Un velo sottile separa la verità dalla leggenda: chi saprà decifrare l'antica profezia?", ytLink: "https://music.youtube.com/watch?v=placeholder5" },
-                { title: "Orion's Eclipse: The Mage's Prophecy", img: "images/06_orion's_eclipse:_the_mage's_prophecy.jpg", audio: "audio/06_orions_eclipse_the_mages_prophecy.mp3", text: "L'eclissi di Orione risveglia antichi poteri. Un mago dimenticato svela il destino dell'universo.", ytLink: "https://music.youtube.com/watch?v=placeholder6" },
-                { title: "Victoria: Dawn of the Cosmos", img: "images/07_victoria:_dawn_of_the_cosmos.jpg", audio: "audio/07_victoria_dawn_of_the_cosmos.mp3", text: "Victoria guida la rinascita delle stelle dopo la caduta degli antichi imperi.", ytLink: "https://music.youtube.com/watch?v=placeholder7" },
-                { title: "Mimì and Victoria: Whispers of the Wild", img: "images/08_mimì_and_victoria:_whispers_of_the_wild.jpg", audio: "audio/08_mimi_and_victoria_whispers_of_the_wild.mp3", text: "Tra foreste stellari e pianeti selvaggi, Mimì e Victoria ascoltano i sussurri degli spiriti cosmici.", ytLink: "https://music.youtube.com/watch?v=placeholder8" },
-                { title: "Stargate Odyssey", img: "images/09_stargate_odyssey.jpg", audio: "audio/09_stargate_odyssey.mp3", text: "Un'odissea tra i portali stellari, dove ogni viaggio svela un frammento di verità.", ytLink: "https://music.youtube.com/watch?v=placeholder9" },
-                { title: "Alcon and Selene (Heart of the Cosmos)", img: "images/10_alcon_and_selene_(heart_of_the_cosmos).jpg", audio: "audio/10_alcon_and_selene_heart_of_the_cosmos.mp3", text: "La storia d'amore tra Alcon e Selene, cuore pulsante dell'universo, eterno e luminoso.", ytLink: "https://music.youtube.com/watch?v=placeholder10" },
-                { title: "Crescendo of Shadows", img: "images/11_crescendo_of_shadows.jpg", audio: "audio/11_crescendo_of_shadows.mp3", text: "Un crescendo sonoro che evoca ombre danzanti su mondi lontani.", ytLink: "https://music.youtube.com/watch?v=placeholder11" },
-                { title: "Allegro of Shadows", img: "images/12_allegro_of_shadows.jpg", audio: "audio/12_allegro_of_shadows.mp3", text: "Ritmi veloci e pulsanti che narrano la fuga delle ombre verso nuovi orizzonti.", ytLink: "https://music.youtube.com/watch?v=placeholder12" },
-                { title: "Baroque Rhapsody", img: "images/13_baroque_rhapsody.jpg", audio: "audio/13_baroque_rhapsody.mp3", text: "Un intreccio di melodie barocche rivisitate in chiave cosmica, tra eleganza e ribellione.", ytLink: "https://music.youtube.com/watch?v=placeholder13" },
-                { title: "Break of Dawn", img: "images/14_break_of_dawn.jpg", audio: "audio/14_break_of_dawn.mp3", text: "La prima luce di un nuovo giorno su un pianeta dimenticato, carica di energia e speranza.", ytLink: "https://music.youtube.com/watch?v=placeholder14" },
-                { title: "The City That Never Sleeps", img: "images/15_the_city_that_never_sleeps.jpg", audio: "audio/15_the_city_that_never_sleeps.mp3", text: "Una città galattica in perenne movimento, dove sogni e realtà si fondono nella notte eterna.", ytLink: "https://music.youtube.com/watch?v=placeholder15" },
-                { title: "Solitude in the Metropolis", img: "images/16_solitude_in_the_metropolis.jpg", audio: "audio/16_solitude_in_the_metropolis.mp3", text: "La solitudine nascosta tra milioni di vite, un inno elettronico alla ricerca di sé stessi.", ytLink: "https://music.youtube.com/watch?v=placeholder16" },
-                { title: "Firstlight Horizon", img: "images/17_firstlight_horizon.jpg", audio: "audio/17_firstlight_horizon.mp3", text: "Il confine tra notte e giorno, tra passato e futuro, tra ciò che siamo e ciò che sogniamo.", ytLink: "https://music.youtube.com/watch?v=placeholder17" },
-                { title: "Hidden Angels", img: "images/18_hidden_angels.jpg", audio: "audio/18_hidden_angels.mp3", text: "Presenze invisibili che vegliano sui viaggiatori dell'universo, cantate in una sinfonia elettronica.", ytLink: "https://music.youtube.com/watch?v=placeholder18" }
+                // Categoria 1: Epica Cosmica
+                { title: "Alcon, King of the Universe", img: "images/01_alcon_king_of_the_universe.jpg", audio: "audio/01_alcon_king_of_the_universe.mp3", text: "Una ballata epica che racconta l'ascesa di Alcon, sovrano di mondi e signore delle stelle.", ytLink: "https://music.youtube.com/watch?v=placeholder1", category: 1 },
+                { title: "Alcon and the Assembly of Knights", img: "images/02_alcon_and_the_assembly_of_knights.jpg", audio: "audio/02_alcon_and_the_assembly_of_knights.mp3", text: "La leggenda dell'antico consiglio dei cavalieri, radunati per proteggere l'universo da forze oscure.", ytLink: "https://music.youtube.com/watch?v=placeholder2", category: 1 },
+                { title: "Captain of the Cosmos", img: "images/03_captain_of_the_cosmos.jpg", audio: "audio/03_captain_of_the_cosmos.mp3", text: "Un viaggio attraverso le galassie al comando di un'astronave leggendaria, alla ricerca di nuove speranze.", ytLink: "https://music.youtube.com/watch?v=placeholder3", category: 1 },
+                { title: "The Twelve Knights of Alagon", img: "images/04_the_twelve_knights_of_alagon.jpg", audio: "audio/04_the_twelve_knights_of_alagon.mp3", text: "Dodici eroi, dodici destini intrecciati, uniti sotto il vessillo di Alagon per salvare il cosmo.", ytLink: "https://music.youtube.com/watch?v=placeholder4", category: 1 },
+                { title: "The Veil of Prophecy", img: "images/05_the_veil_of_prophecy.jpg", audio: "audio/05_the_veil_of_prophecy.mp3", text: "Un velo sottile separa la verità dalla leggenda: chi saprà decifrare l'antica profezia?", ytLink: "https://music.youtube.com/watch?v=placeholder5", category: 1 },
+                { title: "Orion's Eclipse: The Mage's Prophecy", img: "images/06_orion's_eclipse:_the_mage's_prophecy.jpg", audio: "audio/06_orions_eclipse_the_mages_prophecy.mp3", text: "L'eclissi di Orione risveglia antichi poteri. Un mago dimenticato svela il destino dell'universo.", ytLink: "https://music.youtube.com/watch?v=placeholder6", category: 1 },
+                { title: "Victoria: Dawn of the Cosmos", img: "images/07_victoria:_dawn_of_the_cosmos.jpg", audio: "audio/07_victoria_dawn_of_the_cosmos.mp3", text: "Victoria guida la rinascita delle stelle dopo la caduta degli antichi imperi.", ytLink: "https://music.youtube.com/watch?v=placeholder7", category: 1 },
+                { title: "Mimì and Victoria: Whispers of the Wild", img: "images/08_mimì_and_victoria:_whispers_of_the_wild.jpg", audio: "audio/08_mimi_and_victoria_whispers_of_the_wild.mp3", text: "Tra foreste stellari e pianeti selvaggi, Mimì e Victoria ascoltano i sussurri degli spiriti cosmici.", ytLink: "https://music.youtube.com/watch?v=placeholder8", category: 1 },
+                { title: "Stargate Odyssey", img: "images/09_stargate_odyssey.jpg", audio: "audio/09_stargate_odyssey.mp3", text: "Un'odissea tra i portali stellari, dove ogni viaggio svela un frammento di verità.", ytLink: "https://music.youtube.com/watch?v=placeholder9", category: 1 },
+                { title: "Alcon and Selene (Heart of the Cosmos)", img: "images/10_alcon_and_selene_(heart_of_the_cosmos).jpg", audio: "audio/10_alcon_and_selene_heart_of_the_cosmos.mp3", text: "La storia d'amore tra Alcon e Selene, cuore pulsante dell'universo, eterno e luminoso.", ytLink: "https://music.youtube.com/watch?v=placeholder10", category: 1 },
+                
+                // Categoria 2: Sinfonia dell'Oscurità
+                { title: "Crescendo of Shadows", img: "images/11_crescendo_of_shadows.jpg", audio: "audio/11_crescendo_of_shadows.mp3", text: "Un crescendo sonoro che evoca ombre danzanti su mondi lontani.", ytLink: "https://music.youtube.com/watch?v=placeholder11", category: 2 },
+                { title: "Allegro of Shadows", img: "images/12_allegro_of_shadows.jpg", audio: "audio/12_allegro_of_shadows.mp3", text: "Ritmi veloci e pulsanti che narrano la fuga delle ombre verso nuovi orizzonti.", ytLink: "https://music.youtube.com/watch?v=placeholder12", category: 2 },
+                { title: "Baroque Rhapsody", img: "images/13_baroque_rhapsody.jpg", audio: "audio/13_baroque_rhapsody.mp3", text: "Un intreccio di melodie barocche rivisitate in chiave cosmica, tra eleganza e ribellione.", ytLink: "https://music.youtube.com/watch?v=placeholder13", category: 2 },
+                
+                // Categoria 3: Luce e Metropoli
+                { title: "Break of Dawn", img: "images/14_break_of_dawn.jpg", audio: "audio/14_break_of_dawn.mp3", text: "La prima luce di un nuovo giorno su un pianeta dimenticato, carica di energia e speranza.", ytLink: "https://music.youtube.com/watch?v=placeholder14", category: 3 },
+                { title: "The City That Never Sleeps", img: "images/15_the_city_that_never_sleeps.jpg", audio: "audio/15_the_city_that_never_sleeps.mp3", text: "Una città galattica in perenne movimento, dove sogni e realtà si fondono nella notte eterna.", ytLink: "https://music.youtube.com/watch?v=placeholder15", category: 3 },
+                { title: "Solitude in the Metropolis", img: "images/16_solitude_in_the_metropolis.jpg", audio: "audio/16_solitude_in_the_metropolis.mp3", text: "La solitudine nascosta tra milioni di vite, un inno elettronico alla ricerca di sé stessi.", ytLink: "https://music.youtube.com/watch?v=placeholder16", category: 3 },
+                { title: "Firstlight Horizon", img: "images/17_firstlight_horizon.jpg", audio: "audio/17_firstlight_horizon.mp3", text: "Il confine tra notte e giorno, tra passato e futuro, tra ciò che siamo e ciò che sogniamo.", ytLink: "https://music.youtube.com/watch?v=placeholder17", category: 3 },
+                { title: "Hidden Angels", img: "images/18_hidden_angels.jpg", audio: "audio/18_hidden_angels.mp3", text: "Presenze invisibili che vegliano sui viaggiatori dell'universo, cantate in una sinfonia elettronica.", ytLink: "https://music.youtube.com/watch?v=placeholder18", category: 3 }
             ];
             
-            // Create album cards with animation delay
-            const grid = document.getElementById('albumGrid');
+            // Ottenere i riferimenti alle griglie per ciascuna categoria
+            const category1Grid = document.getElementById('category1Grid');
+            const category2Grid = document.getElementById('category2Grid');
+            const category3Grid = document.getElementById('category3Grid');
+            
+            // Filtrare gli album per categoria e creare le card
             albums.forEach((album, idx) => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -686,8 +787,14 @@
                 // Add click event to open modal - manteniamo il comportamento originale
                 card.querySelector('img').addEventListener('click', () => openModal(idx));
                 
-                // Add card to grid
-                grid.appendChild(card);
+                // Add card to appropriate grid based on category
+                if (album.category === 1) {
+                    category1Grid.appendChild(card);
+                } else if (album.category === 2) {
+                    category2Grid.appendChild(card);
+                } else if (album.category === 3) {
+                    category3Grid.appendChild(card);
+                }
             });
             
             // Modal functionality
