@@ -767,7 +767,17 @@ Per chi desidera immergersi in un'avventura sonora che celebra la maestosità de
             Per qualsiasi informazione riguardante la presente Privacy Policy, puoi contattarci all'indirizzo email: info@alcon.world</p>
         </div>
     </div>
-
+    <div id="terms-policy" class="privacy-policy">
+    <div class="privacy-content">
+        <span class="close" id="close-terms">&times;</span>
+        <h2>Termini di Utilizzo</h2>
+        <p><strong>Uso di strumenti tecnologici</strong><br>
+        Parte dei contenuti pubblicati su questo sito possono essere stati realizzati o arricchiti mediante l'uso di strumenti tecnologici avanzati, inclusi, ma non limitati a, sistemi di intelligenza artificiale.
+        Tali strumenti sono utilizzati per supportare il processo creativo senza sostituire l'intervento e il controllo umano.
+        L'utente accetta che il sito possa integrare tali tecnologie nella produzione dei propri contenuti, senza che ciò pregiudichi i diritti di proprietà intellettuale o la responsabilità editoriale del titolare del sito.
+        </p>
+    </div>
+</div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Album data con categorie
@@ -947,6 +957,25 @@ Per chi desidera immergersi in un'avventura sonora che celebra la maestosità de
                 }, 300);
             });
         });
+        // Termini di utilizzo modal
+const termsPolicy = document.getElementById('terms-policy');
+const termsLink = document.getElementById('terms-link');
+const closeTerms = document.getElementById('close-terms');
+
+termsLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    termsPolicy.style.display = 'flex';
+    setTimeout(() => {
+        termsPolicy.style.opacity = '1';
+    }, 10);
+});
+
+closeTerms.addEventListener('click', function() {
+    termsPolicy.style.opacity = '0';
+    setTimeout(() => {
+        termsPolicy.style.display = 'none';
+    }, 300);
+});
     </script>
 </body>
 </html>
