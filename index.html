@@ -915,25 +915,7 @@ Per chi desidera immergersi in un'avventura sonora che celebra la maestosità de
                 }, 1000);
             }
 
-            // Termini di utilizzo modal
-const termsPolicy = document.getElementById('terms-policy');
-const termsLink = document.getElementById('terms-link');
-const closeTerms = document.getElementById('close-terms');
-
-termsLink.addEventListener('click', function(e) {
-    e.preventDefault();
-    termsPolicy.style.display = 'flex';
-    setTimeout(() => {
-        termsPolicy.style.opacity = '1';
-    }, 10);
-});
-
-closeTerms.addEventListener('click', function() {
-    termsPolicy.style.opacity = '0';
-    setTimeout(() => {
-        termsPolicy.style.display = 'none';
-    }, 300);
-});
+        
 
             
             // Handle cookie accept button
