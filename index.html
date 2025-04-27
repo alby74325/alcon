@@ -706,7 +706,7 @@ Per chi desidera immergersi in un'avventura sonora che celebra la maestosità de
                 <ul class="footer-links">
                     <li><a href="#" id="privacy-link">Privacy Policy</a></li>
                     <li><a href="#" id="terms-link">Termini di Utilizzo</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#" id="cookie-link">Cookie Policy</a></li>
                 </ul>
                 <p class="copyright">© 2025 ALCON. Tutti i diritti riservati.</p>
 
@@ -778,6 +778,24 @@ Per chi desidera immergersi in un'avventura sonora che celebra la maestosità de
         </p>
     </div>
 </div>
+<div id="cookie-policy" class="privacy-policy">
+    <div class="privacy-content">
+        <span class="close" id="close-cookie">&times;</span>
+        <h2>Cookie Policy</h2>
+        <p><strong>Utilizzo dei Cookie</strong><br>
+        Questo sito utilizza esclusivamente cookie tecnici essenziali per garantire il corretto funzionamento del sito. Non vengono utilizzati cookie di profilazione o per scopi di marketing.</p>
+        
+        <p><strong>Cosa sono i cookie</strong><br>
+        I cookie sono piccoli file di testo che i siti visitati inviano al dispositivo dell'utente, dove vengono memorizzati per essere ritrasmessi agli stessi siti alla visita successiva.</p>
+        
+        <p><strong>Cookie tecnici</strong><br>
+        I cookie tecnici sono quelli utilizzati al solo fine di effettuare la trasmissione di una comunicazione su una rete di comunicazione elettronica, o nella misura strettamente necessaria al fornitore di un servizio della società dell'informazione esplicitamente richiesto dall'utente a erogare tale servizio.</p>
+        
+        <p><strong>Come disabilitare i cookie</strong><br>
+        È possibile disabilitare i cookie modificando le impostazioni del browser. Tuttavia, ciò potrebbe impedire l'accesso ad alcune funzionalità del sito.</p>
+    </div>
+</div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Album data con categorie
@@ -957,6 +975,25 @@ Per chi desidera immergersi in un'avventura sonora che celebra la maestosità de
                 }, 300);
             });
         });
+        // Cookie policy modal
+const cookiePolicy = document.getElementById('cookie-policy');
+const cookieLink = document.getElementById('cookie-link');
+const closeCookie = document.getElementById('close-cookie');
+
+cookieLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    cookiePolicy.style.display = 'flex';
+    setTimeout(() => {
+        cookiePolicy.style.opacity = '1';
+    }, 10);
+});
+
+closeCookie.addEventListener('click', function() {
+    cookiePolicy.style.opacity = '0';
+    setTimeout(() => {
+        cookiePolicy.style.display = 'none';
+    }, 300);
+});
         // Termini di utilizzo modal
 const termsPolicy = document.getElementById('terms-policy');
 const termsLink = document.getElementById('terms-link');
